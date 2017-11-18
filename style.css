@@ -1,0 +1,61 @@
+body,
+html
+{
+    margin: 0;
+    padding: 0;
+}
+#game
+{
+    position: relative;
+
+    width: 100%;
+    height: 600px;
+
+    background-color: #000;
+}
+#timer,
+#counter
+{
+    font-size: 40px;
+
+    padding: 20px;
+
+    color: #fff;
+}
+#timer
+{
+    float: left;
+}
+#counter
+{
+    text-align: right;
+}
+#startButton{
+  margin: 25px;
+  height: 40px;
+  width: 60px;
+  float: left;
+}
+#catcher
+{
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+
+    width: 200px;
+    height: 30px;
+
+    background-color: red;
+}
+
+.box
+{
+    position: absolute;
+    z-index: 100;
+    top: -150px;
+
+    width: 30px;
+    height: 30px;
+
+    background-color: green;
+}
