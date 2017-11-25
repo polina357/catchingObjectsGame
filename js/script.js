@@ -2,8 +2,7 @@ var score = document.getElementById('counter');
 score.count = 0;
 var gameField = document.getElementById('game');
 var catcher = document.getElementById('catcher');
-var obj = document.getElementById('timer');
-var timerX;
+var modal = document.getElementById('myModal');
 
 function getCoords(elem) {
 	var box = elem.getBoundingClientRect();
@@ -18,35 +17,59 @@ function random(min, max) {
 	return Math.round(Math.random() * (max - min) + min);
 }
 
+var dropInt;
 var start = document.getElementById('startButton');
 start.onclick = function() {
-	setTimeout(timer, 1000);
-	var dropInt = setInterval(dropBox, random(700, 2000));
-
-	var stop = document.getElementById('stopButton');
-	stop.onclick = function() {
-		clearInterval(dropInt);
-		clearTimeout(timerX);
-		alert('Your score is ' + score.count);
-		score.innerHTML = 0;
-		score.count = 0;
-		obj.innerHTML = 60;
-	};
+	start.disabled = true;
+	dropInt = setInterval(dropBox, random(700, 2000));
 };
 
-function timer() {
+var stop = document.getElementById('stopButton');
+stop.onclick = function() {
+	clearInterval(dropInt);
+	generateHistory();
+	modal.style.display = "block";
+	score.innerHTML = 0;
+	score.count = 0;
+};
 
-	obj.innerHTML--;
-
-	if (obj.innerHTML == 0) {
-		setTimeout(function() {}, 1000);
-		clearInterval(dropBox);
-		clearInterval(timer);
-		alert('Your score is ' + score.count);
+function generateHistory() {
+	var id;
+	if (localStorage.length == 0) {
+		id = 0;
 	} else {
-		timerX = setTimeout(timer, 1000);
+		id = localStorage.length;
 	}
+
+	if (score.count != 0) {
+		localStorage.setItem(id, score.count);
+		id++;
+	}
+
+	var history = document.getElementById('history');
+
+	while (history.firstChild) {
+		history.removeChild(benchTable.firstChild);
+	}
+
+	var tbody = document.createElement('TBODY');
+	for (var i = 0; i < id; i++) {
+		var tr = document.createElement('TR');
+		tbody.appendChild(tr);
+		var td1 = document.createElement('td');
+		tr.appendChild(td1);
+		td1.appendChild(document.createTextNode('' + i.toString()));
+		var td2 = document.createElement('td');
+		tr.appendChild(td2);
+		td2.appendChild(document.createTextNode('' + localStorage.getItem(i)));
+	}
+	history.appendChild(tbody);
 }
+
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+	modal.style.display = "none";
+};
 
 function dropBox() {
 	var left = random(0, gameField.offsetWidth - 30);
