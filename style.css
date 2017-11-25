@@ -1,8 +1,12 @@
 body,
 html
 {
+    font-family: Verdana, Geneva, sans-serif;
+
     margin: 0;
     padding: 0;
+
+    background-color: #000;
 }
 #game
 {
@@ -11,10 +15,8 @@ html
 
     width: 100%;
     height: 600px;
-
-    background-color: #000;
 }
-#timer,
+
 #counter
 {
     font-size: 40px;
@@ -22,26 +24,29 @@ html
     padding: 20px;
 
     user-select: none;
+    text-align: right;
 
     color: #fff;
-}
-#timer
-{
-    float: left;
-}
-#counter
-{
-    text-align: right;
 }
 #startButton,
 #stopButton
 {
+    font-size: 15px;
+
     float: left;
 
     width: 50px;
     height: 40px;
     margin: 25px;
     margin-right: -10px;
+
+    border: none;
+    background-color: #fff;
+}
+#startButton,
+#stopButton:hover
+{
+    cursor: pointer;
 }
 #catcher
 {
@@ -65,4 +70,81 @@ html
     height: 30px;
 
     background-color: green;
+}
+.modal
+{
+    position: fixed;
+    z-index: 1000; /* Sit on top */
+    top: 50%;
+    left: 50%;
+
+    display: none; /* Hidden by default */
+    overflow: auto; /* Enable scroll if needed */
+
+    width: 500px;
+    height: 200px;
+    margin-top: -100px; /* Negative half of height. */
+    margin-left: -250px; /* Negative half of width. */
+
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,.4); /* Black w/ opacity */
+}
+.modal-body
+{
+    padding: 2px 10px;
+}
+
+.modal-content
+{
+    position: relative;
+
+    width: 80%;
+    margin: auto;
+    padding: 0;
+
+    animation-name: animatetop;
+    animation-duration: .4s;
+
+    border: 1px solid #888;
+    background-color: #fefefe;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19);;
+}
+table {
+    width: 100%;
+    border: 1px solid black;
+    text-align: center;
+}
+@keyframes animatetop
+{
+    from
+    {
+        top: -300px;
+
+        opacity: 0;
+    }
+    to
+    {
+        top: 0;
+
+        opacity: 1;
+    }
+}
+.close
+{
+    font-size: 28px;
+    font-weight: bold;
+    padding-right: 10px;
+
+    float: right;
+
+    color: #aaa;
+}
+
+.close:hover,
+.close:focus
+{
+    cursor: pointer;
+    text-decoration: none;
+
+    color: black;
 }
